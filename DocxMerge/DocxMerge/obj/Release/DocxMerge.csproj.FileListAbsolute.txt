@@ -1,0 +1,2 @@
+D:\code\DocxMerge\DocxMerge\DocxMerge\obj\Release\DocxMerge.exe
+D:\code\DocxMerge\DocxMerge\DocxMerge\obj\Release\DocxMerge.pdb
