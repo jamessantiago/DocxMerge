@@ -1,3 +1,0 @@
-D:\code\DocxMerge\DocxMerge\DocxMerge\obj\Debug\DocxMerge.csprojResolveAssemblyReference.cache
-D:\code\DocxMerge\DocxMerge\DocxMerge\obj\Debug\DocxMerge.exe
-D:\code\DocxMerge\DocxMerge\DocxMerge\obj\Debug\DocxMerge.pdb
