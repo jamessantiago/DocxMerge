@@ -3,7 +3,7 @@ Simple command line program to merge word documents
 
 ## Getting Started
 
-First grab a copy of DocxMerge.exe and copy to your local system (preferably in your [PATH](https://en.wikipedia.org/wiki/PATH_%28variable%29) for easy access).
+First [grab a copy](https://github.com/jamessantiago/DocxMerge/releases) of DocxMerge.exe and copy to your local system (preferably in your [PATH](https://en.wikipedia.org/wiki/PATH_%28variable%29) for easy access).
 
 Run this command:
 
