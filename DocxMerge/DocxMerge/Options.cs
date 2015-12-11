@@ -16,6 +16,9 @@ namespace DocxMerge
         [Option('o', "output", Required = false, HelpText = "Output file [Default: output.docx]")]
         public string Output { get; set; }
 
+        [Option('f', "Force", Required = false, HelpText = "Replace output if already exists")]
+        public bool Force { get; set; }
+
         [Option('v', "Verbose", Required = false, HelpText = "Show more information when executing")]
         public bool Verbose { get; set; }
     }

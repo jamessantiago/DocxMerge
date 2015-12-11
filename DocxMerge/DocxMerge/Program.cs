@@ -18,6 +18,7 @@ namespace DocxMerge
             IEnumerable<string> inputFiles = null;
             string output = null;
             bool verbose = false;
+            bool force = false;
 
             var results = CommandLine.Parser.Default.ParseArguments<Options>(args);
             results.MapResult(options =>
@@ -25,6 +26,7 @@ namespace DocxMerge
                 inputFiles = options.InputFiles;
                 output = options.Output ?? "output.docx";
                 verbose = options.Verbose;
+                force = options.Force;
                 return 0;
             }, errors =>
             {
@@ -42,7 +44,7 @@ namespace DocxMerge
 
             try {
                 if (verbose) Console.WriteLine("Creating initial document");
-                File.Copy(inputFiles.First(), output);
+                File.Copy(inputFiles.First(), output, force);
 
                 if (verbose) Console.WriteLine("Opening {0} for writing", output);
                 using (WordprocessingDocument doc = WordprocessingDocument.Open(output, true))
