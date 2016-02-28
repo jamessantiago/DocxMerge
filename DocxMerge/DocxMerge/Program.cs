@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Packaging;
 using System.IO;
@@ -19,6 +20,7 @@ namespace DocxMerge
             string output = null;
             bool verbose = false;
             bool force = false;
+            bool repairSpacing = false;
 
             var results = CommandLine.Parser.Default.ParseArguments<Options>(args);
             results.MapResult(options =>
@@ -27,6 +29,7 @@ namespace DocxMerge
                 output = options.Output ?? "output.docx";
                 verbose = options.Verbose;
                 force = options.Force;
+                repairSpacing = options.RepairSpacing;
                 return 0;
             }, errors =>
             {
@@ -62,20 +65,56 @@ namespace DocxMerge
                         var chunk = mainPart.AddAlternativeFormatImportPart(
                             "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml",
                             altChuckId);
+
+                        if (repairSpacing)
+                            RepairSentenceSpacing(filepath, verbose);
+
                         using (FileStream fileStream = File.Open(filepath, FileMode.Open))
-                            chunk.FeedData(fileStream);
+                            chunk.FeedData(fileStream);                        
                         var altChunk = new XElement(w + "altChunk", new XAttribute(r + "id", altChuckId));
                         var mainDocumentXDoc = GetXDocument(doc);
-                        mainDocumentXDoc.Root.Element(w + "body").Elements(w + "p").Last().AddAfterSelf(altChunk);
-                        SaveXDocument(doc, mainDocumentXDoc);
+                        
+                        mainDocumentXDoc.Root.Element(w + "body").Elements(w + "p").Last().AddAfterSelf(altChunk);                        
+                        SaveXDocument(doc, mainDocumentXDoc);                        
                     }
                 }
+                
                 if (verbose) Console.WriteLine("Successfully merged all documents");
             }
             catch (Exception ex)
             {
                 if (verbose) ExitWithError(ex.ToString());
                 else ExitWithError("DocxMerge failed to process the files: {0}", ex.Message);
+            }
+        }
+
+        private static void RepairSentenceSpacing(string filepath, bool verbose)
+        {
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filepath, true))
+            {
+                string docText = null;
+                using (StreamReader sr = new StreamReader(wordDoc.MainDocumentPart.GetStream()))
+                {
+                    docText = sr.ReadToEnd();
+                }
+
+                Regex regexText = new Regex(@"\. (?<a>[A-Z])");
+                var refIndex = docText.IndexOf("References");
+                if (refIndex > 0)
+                {
+                    var bodyText = docText.Substring(0, refIndex);
+                    var references = docText.Substring(bodyText.Length);
+                    docText = regexText.Replace(bodyText, ".  ${a}") + references;
+                }
+                else
+                {
+                    docText = regexText.Replace(docText, ".  ${a}");
+                }               
+
+                using (StreamWriter sw = new StreamWriter(wordDoc.MainDocumentPart.GetStream(FileMode.Create)))
+                {
+                    sw.Write(docText);
+                }
             }
         }
 
