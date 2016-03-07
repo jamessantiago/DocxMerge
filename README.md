@@ -16,15 +16,18 @@ The full option listing can be seen using the `--help` switch:
     > .\DocxMerge.exe --help
     DocxMerge 1.1.0.0
     Copyright c James Santiago 2015
-    
-      -i, --input      Required. A list of docx files to merge in order
-    
-      -o, --output     Output file [Default: output.docx]
-    
-      -f, --Force      Replace output if already exists
-    
-      -v, --Verbose    Show more information when executing
-    
-      --help           Display this help screen.
-    
-      --version        Display version information.
+
+      -i, --input             Required. A list of docx files to merge in order
+
+      -o, --output            Output file [Default: output.docx]
+
+      -f, --Force             Replace output if already exists
+
+      -r, --Repair-Spacing    Replace single spacing after sentences removed from
+                              pandoc
+
+      -v, --Verbose           Show more information when executing
+
+      --help                  Display this help screen.
+
+      --version               Display version information.
