@@ -14,7 +14,7 @@ This will merge your two documents in the order that you listed the files and ou
 The full option listing can be seen using the `--help` switch:
 
     > .\DocxMerge.exe --help
-    DocxMerge 1.1.0.0
+    DocxMerge 1.2.0.0
     Copyright c James Santiago 2015
 
       -i, --input             Required. A list of docx files to merge in order
