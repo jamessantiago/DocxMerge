@@ -1,9 +1,8 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocxMerge", "DocxMerge\DocxMerge.csproj", "{97EC5023-46FC-4027-BF4E-33A5E8890FA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocxMerge", "DocxMerge\DocxMerge.csproj", "{97EC5023-46FC-4027-BF4E-33A5E8890FA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +17,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {876BE244-2A1E-4AF6-A521-50518B1C60A4}
 	EndGlobalSection
 EndGlobal
